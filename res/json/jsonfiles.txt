@@ -1,0 +1,18 @@
+수정이 필요한 파일
+adminc.json : 관리자 채널 적는 곳. (경험치 관련)
+
+servers.json : 서버 경험치 설정 적는 곳
+<양식>
+    "서버ID(str)": {
+        "exp_down": 20,
+        "exp_up": 40,
+        "leaderboard_notification": [
+        ]
+    }
+
+가만히 두면 반이라도 가는 파일 ( = 수정하지 마)
+alarms.json
+categories.json
+channels.json
+role.json
+stock.json
