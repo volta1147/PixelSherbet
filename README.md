@@ -1,4 +1,5 @@
-# PixelMalang
+# PixelSherbet
+전에꺼 PixelMalang 터져서 다시만듬
 ## 읽어보기
 * [잡담](res/about.md)
 * [코드 스타일](res/CodeStyle.md)
