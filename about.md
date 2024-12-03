@@ -1,15 +1,14 @@
-# PixelSherbet
-
-## 버전
 <figure class="table">
     <table>
-        <tbody>
+        <thead>
             <tr>
-                <td colspan="2">버전명</td>
-                <td>날짜</td>
-                <td>공개 여부</td>
-                <td>기타</td>
+                <th colspan="2">버전명</th>
+                <th>날짜</th>
+                <th>공개 여부</th>
+                <th>기타</th>
             </tr>
+        </thead>
+        <tbody>
             <tr>
                 <td colspan="5">VoltaBot 1</td>
             </tr>
