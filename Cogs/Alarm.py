@@ -73,7 +73,7 @@ class Alarm(commands.Cog):
         now = datetime.datetime.now(tz=KST)+timedelta(seconds=1) # 59.999999초 방지
         tmstr = f'{now.weekday()}-{now.hour}-{now.minute}'
         for i in self.alarms.keys():
-            if tmstr == i.split()[1]:
+            if tmstr == i.split()[-1]:
                 alarm:dict = self.alarms[i]
                 if alarm['activate']:
                     result = f'### `{alarm['name']}`\n{weeknum2day[alarm['weekday']]} {alarm['hour']}시 {str(alarm['minute']).zfill(2)}분에 지정된 `{alarm['name']}` 알람'
@@ -97,7 +97,7 @@ class Alarm(commands.Cog):
         if not exist:
             file.append_json('alarm', "alarms_forever", {'name':name, 'DM':True, 'activate':True, 'id':interaction.user.id, 'weekday':weeknum, 'hour':hour, 'minute':minute})
             self.alarms = {f'{i['id']}-{i['name']} {i['weekday']}-{i['hour']}-{i['minute']}':i for i in list(file.read_json('alarm').values())[0]}
-            await interaction.response.send_message(f"{interaction.user.mention} {weekday} {hour}:{minute}에 `{name}` 알람이 추가되었습니다. ")
+            await interaction.response.send_message(f"{interaction.user.mention} {weekday} {str(hour).zfill(2)}:{str(minute).zfill(2)}에 `{name}` 알람이 추가되었습니다. ")
         else:
             await interaction.response.send_message(f"`{name}` 알람은 이미 존재합니다. ")
 
