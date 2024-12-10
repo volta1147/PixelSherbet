@@ -54,8 +54,7 @@ async def openfile(interaction: discord.Interaction, memo_title):
         return await interaction.response.send_message(content="메모를 찾지 못했습니다. ", embed=embed, ephemeral=True)
     else:
         return await interaction.response.send_message(embed=embed)
-
-
+    
 class OpenModal(MemoUI.OpenModal):
     async def on_submit(self, interaction: discord.Interaction):
         memo_title = str(self.memo_title)
@@ -73,13 +72,6 @@ class AppendModal(MemoUI.WriteModal2):
         embed = discord.Embed(title = filename, description = file.openfile("memo", filename), color = 0xbdb092)
         embed.set_footer(text = file.memover('memo', filename, file.getver('rev', filename)))
         return await interaction.response.send_message(embed=embed, ephemeral=True)
-
-async def openfile(interaction: discord.Interaction, memo_title):
-    memo_state, embed = MemoUI.memo_embed(memo_title)
-    if not memo_state == "OK":
-        return await interaction.response.send_message(content="메모를 찾지 못했습니다. ", embed=embed, ephemeral=True)
-    else:
-        return await interaction.response.send_message(embed=embed)
 
 class Memo(commands.Cog):
     def __init__(self, bot):
