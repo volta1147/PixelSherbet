@@ -7,10 +7,9 @@ def ismemo(filename: str):
     return name.isfile()
 
 def openfile(cmd: str, filename: str, newfile=False):
-    name = ln("community", cmd, filename, form="txt") # cmd+os.path.sep+filename+".txt"
-    if name.isfile(): # os.path.isfile(name):
-        return name.read() # with open(name, "r", encoding="utf8") as file:
-        #     return file.read()
+    name = ln("community", cmd, filename, form="txt")
+    if name.isfile():
+        return name.read()
     else:
         if newfile:
             name.write()
@@ -43,7 +42,7 @@ def userlvl(id:int, guildid:int):
                 return i['chats']
 
 def rev(folder: str, filename: str, memo: str, mode:Literal['w', 'a']='w'):
-    dr = lndir("community", folder, filename)# folder+os.path.sep+filename
+    dr = lndir("community", folder, filename)
     revf = ln("res", "tmp")
     revv = 0
     if not dr.isdir():

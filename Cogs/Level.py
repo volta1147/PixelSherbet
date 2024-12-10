@@ -1,7 +1,6 @@
 import discord
 from discord import app_commands
 from discord.ext import commands
-from datetime    import timedelta
 import json
 import random
 import time
@@ -27,7 +26,6 @@ class Level(commands.Cog):
             a = json.load(ln("community", "chats", form="json").open())
             exp0 = 0
             exp1 = 0
-            print(message.channel.type)
             upgrade = random.randrange(10, 20)
             newpoint = random.randrange(1, 5)
             if message.author.id not in [i['id'] for i in a[str(message.guild.id)]['users']]:

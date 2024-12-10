@@ -34,16 +34,11 @@ def enabled_alarms(alarms:list[dict]):
 
 class AlarmSelect(discord.ui.Select):
     def __init__(self, title:str, alarms:list[dict]):
-        options = [] # [discord.SelectOption(label="나가기", emoji="⬅️")]
+        options = []
         for i in alarms:
             emoji = "✅" if i['activate'] else "❌"
             options.append(discord.SelectOption(label=i['name'], description=f"{weeknum2day[i['weekday']]} {i['hour']} : {str(i['minute']).zfill(2)}", emoji=emoji, default=i['activate']))
         super().__init__(placeholder = title, options = options, min_values=0, max_values=len(alarms))
-
-    # async def callback(self, interaction: discord.Interaction):
-    #     # 몰라 씨발
-    #     result = alarm_list(interaction.user)
-    #     await interaction.response.edit_message(content=result, view=None)
 
 class Select(discord.ui.View):
     def __init__(self, title:str, alarms:list[dict]):
@@ -76,7 +71,6 @@ class Alarm(commands.Cog):
                 alarm:dict = self.alarms[i]
                 if alarm['activate']:
                     result = f'### `{alarm['name']}`\n{weeknum2day[alarm['weekday']]} {alarm['hour']}시 {str(alarm['minute']).zfill(2)}분에 지정된 `{alarm['name']}` 알람'
-                    print(result)
 
                     chat = await self.bot.get_user(alarm['id']).create_dm()
 
@@ -122,8 +116,7 @@ class Alarm(commands.Cog):
             await interaction.response.send_message(f"{time_str} 에 있었던 `{name}` 알람을 삭제했습니다. ")
         else:
             await interaction.response.send_message(f"`{name}` 알람이 없습니다. ")
-    
-    # 알람 껐다켜는거 좆같이 어렵네 씨봉방
+
     # @alarm.command(name = "select", description = "알람을 선택합니다.")
     # async def alarmselect(self, interaction:discord.Interaction):
     #     alarm_select = Select('알람 목록', list(self.alarms.values()))

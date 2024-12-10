@@ -14,7 +14,6 @@ community/profile/**
 community/profilerev/**
 community/python/**
 community/pyrev/**
-community/print/print.txt
 
 **/__pycache__
 *.pyc

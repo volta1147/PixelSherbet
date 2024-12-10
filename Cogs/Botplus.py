@@ -1,7 +1,6 @@
 import discord
 from discord import app_commands
 from discord.ext import commands
-from launchio import ln
 import random
 import asyncio
 import subprocess
@@ -24,23 +23,15 @@ class Botplus(commands.Cog):
     async def on_ready(self):
         print("Restarting...")
 
-    @commands.command(name = "print", help = "입력한 내용을 출력합니다 (원본 메시지 삭제)")
+    @commands.command(name = "print", help = "입력한 내용을 출력합니다. (원본 메시지 삭제)")
     async def printctx(self, ctx:commands.Context, *, abc):
-        await ctx.message.delete() # ctx.channel.purge(limit=1)
-        rep = await ctx.send(abc, reference = ctx.message.reference)
-        printlog = ln("community", "print", "print.txt")
-        printlog.write(f"content = {abc} \t author = {ctx.message.author} \t [link](<https://discord.com/channels/{rep.guild.id}/{rep.channel.id}/{rep.id}>) \n", mode='a')
+        await ctx.message.delete()
+        await ctx.send(abc, reference = ctx.message.reference)
 
-    @commands.command(name = "reaction", help = "입력한 내용을 출력합니다 (원본 메시지 삭제)")
+    @commands.command(name = "reaction", help = "반응을 추가합니다. ")
     async def reactionctx(self, ctx:commands.Context, *, abc):
-        await ctx.message.delete() # ctx.channel.purge(limit=1)
-        rep = await ctx.message.reference.resolved.add_reaction(abc)
-        # printlog = ln("community", "print", "print.txt")
-        # printlog.write(f"content = +{abc} \t author = {ctx.message.author} \t [link](<https://discord.com/channels/{rep.guild.id}/{rep.channel.id}/{rep.id}>) \n", mode='a')
-
-    @commands.command(name = "🤔", help = "?")
-    async def thinking(self, ctx:commands.Context):
-        await ctx.send(f"{ctx.author.mention} 사랑해~😍")
+        await ctx.message.delete()
+        await ctx.message.reference.resolved.add_reaction(abc)
 
     @commands.command(name = "random", help = "주어진 단어 중 하나를 선택합니다. ")
     async def randomword(self, ctx, *words):
@@ -89,6 +80,7 @@ class Botplus(commands.Cog):
 
             result = subprocess.getoutput("python3 pythoncode\\test.py")
             await ctx.send(result)
+
 
     # @commands.group(name = "list", help = "리스트 랜덤추첨 관련")
     # async def levellist(self, ctx):

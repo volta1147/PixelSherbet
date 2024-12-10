@@ -5,7 +5,6 @@ import datetime
 import asyncio
 from discord     import app_commands
 from discord.ext import commands, tasks
-from datetime    import timedelta
 
 # 여기에 사용자 정의 라이브러리 넣기
 
@@ -26,8 +25,6 @@ class Stock(commands.Cog):
         for i in self.stocks.items():
             i[1].day()
             file.edit_json('stock', i[0], {'price':i[1].price, 'name':i[1].nick})
-        print('update') # , str(datetime.datetime.now().second)+'.'+str(datetime.datetime.now().microsecond).zfill(6))
-
 
     stock_app = app_commands.Group(name="stock", description="주식 시뮬")
 

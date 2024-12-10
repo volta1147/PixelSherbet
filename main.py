@@ -1,5 +1,5 @@
 '''
-## PixelSherbet 3.0
+## PixelSherbet Sherbet 3.5
 based on VoltaBot 2.2
 made by shashaping_love
 original bot made by shashaping_love
@@ -13,7 +13,6 @@ sep = os.path.sep
 sys.path.append(sep.join(sys.argv[0].split("/")[:-1]))
 
 import discord
-from discord import app_commands
 from discord.ext import commands, tasks
 import lib.botsetup as botset
 import lib.vars as vars
@@ -138,7 +137,7 @@ async def help2(interaction: discord.Interaction):
 
 bot.run(botset.token)
 
-# PixelSherbet 3.0
+# PixelSherbet Sherbet 3.5
 # based on VoltaBot 2.2
 # made by shashaping_love
 # original bot made by shashaping_love

@@ -86,20 +86,18 @@ class Memo(commands.Cog):
     async def openm(self, ctx:commands.Context, *, filenamein):
         filename = MemoUI.open_name(filenamein)
         if file.ismemo(filename):
-            # print(f"{filename} 있음")
             embed = discord.Embed(title = filename, description = file.openfile("memo", filename), color = 0xbdb092)
             embed.set_footer(text = file.memover('memo', filename, file.getver('rev', filename)))
-            memoembed = await ctx.send(embed = embed)# , view=MemoUI.MemoUIBeta())
+            memoembed = await ctx.send(embed = embed)
             await asyncio.sleep(30)
             await memoembed.edit(view=None)
         else:
-            # print(f"{filename} 없음")
             await ctx.send(filename+" 메모가 없습니다. "+filename+" 메모를 생성하려면 \n```"+botset.prefix+"memo edit "+filename+" 메모 내용```\n 을 입력하세요.")
 
     @memo.command(name = "open2")
     async def openm2(self, ctx:commands.Context, *, filenamein):
         memo_state, embed = MemoUI.memo_embed(filenamein)
-        memo_cont = await ctx.send(embed=embed)# , view=MemoUI.MemoUIBeta())
+        memo_cont = await ctx.send(embed=embed)
         if memo_state == "OK":
             await asyncio.sleep(30)
             await memo_cont.edit(view=None)

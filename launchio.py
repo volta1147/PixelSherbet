@@ -82,7 +82,6 @@ class lndir:
             chfl.path = self.path + os.path.sep + os.path.sep.join(paths)
         else:
             chfl.path = self.path + os.path.sep + os.path.sep.join(paths) + "." + form
-        print(chfl)
         return chfl
     
     def listdir(self):

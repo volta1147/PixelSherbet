@@ -1,7 +1,4 @@
 import discord
-from launchio import lndir, ln
-import lib.botsetup as botset
-import lib.file as file
 
 class PySelect(discord.ui.Select):
     def __init__(self):

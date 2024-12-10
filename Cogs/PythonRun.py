@@ -2,9 +2,6 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 import sys
-import asyncio
-import subprocess
-import lib.botsetup as botset
 import lib.file as file
 import lib.PythonUI as PythonUI
 

@@ -3,7 +3,6 @@ from discord import app_commands
 from discord.ext import commands
 from gtts import gTTS
 from launchio import ln
-import lib.botsetup as botset
 
 '''
 지금 안넣고 나중에 넣을건데 ffmpeg 깔려있는지 아닌지 물어보는 코드 쓰고 깔아주는것까지 해놔라!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

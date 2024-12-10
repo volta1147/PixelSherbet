@@ -25,7 +25,6 @@ def open_name(filenamein: str):
         return filenamein
 
 def memo_embed(filename: str, pfver = -1):
-    # print(filename)
     if lndir("community", "rev", filename).isdir():
         if pfver >= 0:
             ver = str(pfver)
