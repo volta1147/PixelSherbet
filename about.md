@@ -2,7 +2,8 @@
     <table>
         <thead>
             <tr>
-                <th colspan="2">버전명</th>
+                <th>코드네임</th>
+                <th colspan="2">버전</th>
                 <th>날짜</th>
                 <th>공개 여부</th>
                 <th>기타</th>
@@ -10,21 +11,26 @@
         </thead>
         <tbody>
             <tr>
-                <td colspan="5">VoltaBot 1</td>
+                <td rowspan="3"><s>Pre-Voltaic</s></td>
+                <td colspan="5"><s>VoltaBot 1</s></td>
             </tr>
             <tr>
-                <td colspan="2">0.0.?</td>
-                <td>2023년 ?월 ?일</td>
-                <td>X</td>
+                <td colspan="2"><s>0.0.?</s></td>
+                <td><s>2023년 ?월 ?일</s></td>
+                <td><s>X</s></td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td colspan="2">0.1.0</td>
-                <td>2023년 8월 24?일</td>
-                <td>Δ</td>
+                <td colspan="2"><s>0.1.0</s></td>
+                <td><s>2023년 8월 24?일</s></td>
+                <td><s>Δ</s></td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
+                <td rowspan="16">
+                    <p>Voltaic</p>
+                    <p>(2.x)</p>
+                </td>
                 <td colspan="5">VoltaBot 2</td>
             </tr>
             <tr>
@@ -128,6 +134,10 @@
                 <td>&nbsp;</td>
             </tr>
             <tr>
+                <td rowspan="9">
+                    <p>Proxima</p>
+                    <p>(3.x)</p>
+                </td>
                 <td colspan="5">VoltGDBot (Based on Voltabot 2.0.187)</td>
             </tr>
             <tr>
@@ -145,7 +155,7 @@
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td colspan="5">PixelSherbet</td>
+                <td colspan="5">PixelMalang</td>
             </tr>
             <tr>
                 <td rowspan="2">
@@ -191,14 +201,32 @@
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td>
-                    <p>Sherbet3</p>
-                    <p>Beta 3.5</p>
-                </td>
-                <td>3.0.2412.305</td>
+                <td rowspan="3">Sherbet</td>
+                <td colspan="5">PixelSherbet</td>
+            </tr>
+            <tr>
+                <td>Sherbet 3.5</td>
+                <td>3.0.2412.1</td>
                 <td>2024년 12월 3일</td>
                 <td>O</td>
-                <td>&nbsp;</td>
+                <td>
+                    <p>PixelSherbet Nov Update</p>
+                    <p>Sherbet3 Beta 3.5에서</p>
+                    <p>승격됨.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p><s>Sherbet 3.6?</s></p>
+                    <p><s>Sherbet 4?</s></p>
+                </td>
+                <td>
+                    <p><s>3.0.2501?</s></p>
+                    <p><s>4.0.2501?</s></p>
+                </td>
+                <td><s>2025년 1?월 ??일</s></td>
+                <td><s>?</s></td>
+                <td><s>PixelSherbet Dec Update</s></td>
             </tr>
         </tbody>
     </table>
