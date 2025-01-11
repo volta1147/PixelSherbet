@@ -90,7 +90,7 @@ class Level(commands.Cog):
     @app_commands.command(name = "leaderboard", description = "레벨 등수를 출력합니다. ")
     async def leaderboard(self, interaction: discord.Interaction, top10:bool=True, ephemeral:bool=False):
         a = json.load(ln("community", "chats", form="json").open())
-        usernames = [i['nick']  for i in a[str("1196753753618010162")]['users']]
+        usernames = [i['nick']  for i in a[str(interaction.guild.id)]['users']]
         userexps  = [i['chats'] for i in a[str(interaction.guild.id)]['users']]
         users = zip(usernames, userexps)
 
