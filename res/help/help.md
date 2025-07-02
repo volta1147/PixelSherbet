@@ -1,14 +1,6 @@
 # 도움말
-## 봇 정보
-봇 이름 : PixelMalang
-버전 : 3.0.2510 beta 3.5
-작성일 : 2024.12.02
-
-## 소개
-[개발 중](<https://github.com/sherbetcream/PixelSherbet>)인 평범한 디스코드 봇이다. 저기 매일 의견 들으니 자주 좀 쓰자
-
 ## 기능 설명
-현재 개발이 어느 정도 완료된 것들만 작성합니다. 
+3월 25일 기준
 
 ### 기본 기능
 `:>ping` : 기본적인 속도 테스트
@@ -23,7 +15,7 @@
 `/slashprint` : 슬래시 명령어로 출력하기
 
 ### TTS
-`:>tts_legacy tts` : tts로 출력하기
+`:>tts_chat speak` : tts로 출력하기
 `/tts speak` : tts로 출력하기
 `/tts exit` : tts봇을 음성채팅에서 내보내기
 

@@ -1,8 +1,7 @@
 '''
-## PixelSherbet Sherbet 3.5
-based on VoltaBot 2.2
-made by shashaping_love
-original bot made by shashaping_love
+## SherbetBot
+### powered by PixelSherbet 3.5
+made by sherbet.flame
 '''
 
 import sys
@@ -13,6 +12,7 @@ sep = os.path.sep
 sys.path.append(sep.join(sys.argv[0].split("/")[:-1]))
 
 import discord
+from discord import app_commands
 from discord.ext import commands, tasks
 import lib.botsetup as botset
 import lib.vars as vars
@@ -25,12 +25,14 @@ print("Starting...")
 
 botset.varset()
 
+bot = commands.Bot(command_prefix=botset.prefix, intents=discord.Intents.all())
+
 pingnum = 0
 nexttime = 0
 
 desc = '''
-기능 문의 : shashaping_love
-개발 페이지 : <https://github.com/volta1147/PixelMalang>'''
+기능 문의 : sherbet.flame
+개발 페이지 : <https://github.com/volta1147/PixelSherbet>'''
 
 class HelpBtn(discord.ui.View):
     def __init__(self, interaction: discord.Interaction, helps: list):
@@ -53,8 +55,6 @@ class HelpBtn(discord.ui.View):
 
 def getuserid(user):
     return int(user[2:len(user)-1])
-
-bot = commands.Bot(command_prefix=botset.prefix, intents=discord.Intents.all())
 
 async def load_extensions():
     cogsnum = 0
@@ -98,10 +98,7 @@ async def on_message(message:discord.Message):
     global pingnum
     if bot.user.mentioned_in(message):
         pingnum += 1
-        if random.randrange(3**pingnum) == 0:
-            await message.channel.send("이몸 등장!")
-        else:
-            await message.channel.send(random.choice(vars.ping))
+        await message.channel.send(random.choice(vars.ping))
     await bot.process_commands(message)
 
 @bot.command(help = "테스트")
@@ -118,8 +115,8 @@ async def mention(ctx):
 
 @bot.command(help = "봇의 정보를 출력합니다. ")
 async def info(ctx):
-    embed = discord.Embed(title = "PixelMalang", description = f"{desc}", color = 0x747F00)
-    embed.set_footer(text = botset.version + ", By shashaping_love")
+    embed = discord.Embed(title = "SherbetBot", description = f"{desc}", color = 0x747F00)
+    embed.set_footer(text = botset.version + ", By sherbet.flame")
     await ctx.send(embed=embed)
 
 @bot.command(help = "봇을 종료합니다. 봇 관리자만 이용 가능")
@@ -137,7 +134,4 @@ async def help2(interaction: discord.Interaction):
 
 bot.run(botset.token)
 
-# PixelSherbet Sherbet 3.5
-# based on VoltaBot 2.2
-# made by shashaping_love
-# original bot made by shashaping_love
+# PixelMalang

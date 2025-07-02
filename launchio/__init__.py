@@ -12,16 +12,14 @@ from typing import Literal
 
 sep = os.path.sep
 
-pathname = sep.join(__file__.split("\\")[:-1])+sep
+pathname = sep.join(__file__.split(sep)[:-2])+sep
 
 class ln:
-    def __init__(self, *paths, form = "", make_new = True):
-        self.dir  = pathname + sep.join(paths[:-1])
-        self.path = pathname + sep.join(paths)
-        if len(form) != 0:
-            self.path += "." + form
-        if make_new:
-            os.makedirs(self.dir, exist_ok=True)
+    def __init__(self, *paths, form = ""):
+        if len(form) == 0:
+            self.path = pathname + sep.join(paths)
+        else:
+            self.path = pathname + sep.join(paths) + "." + form
 
     def __str__(self):
         return self.path

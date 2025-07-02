@@ -1,19 +1,22 @@
 import discord
 from discord import app_commands
 import datetime
-import lib.file as file
 import asyncio
-from discord.ext import commands, tasks
-from datetime    import timedelta
-from typing      import Literal
+from discord.ext   import commands, tasks
+from datetime      import timedelta
+from typing        import Literal
+from launchio.json import JSON
+from lib.file      import json_path
 
 KST=datetime.timezone(datetime.timedelta(hours=9))
 
 weekday2num = {'Mon':0, 'Tue':1, 'Wed':2, 'Thr':3, 'Fri':4, 'Sat':5, 'Sun':6}
 weeknum2day = {0:'Mon', 1:'Tue', 2:'Wed', 3:'Thr', 4:'Fri', 5:'Sat', 6:'Sun'}
 
+alarm_file = JSON(json_path.chifile('alarm.json'))
+
 def alarm_list(user:discord.User|discord.Member):
-    alarms = list(file.read_json('alarm').values())[0]
+    alarms = list(alarm_file().values())[0]
     my_alarms = []
     alarm_name_max = 0
     alarm_info = lambda x, a: f"{x['name'].ljust(a)} - {weeknum2day[x['weekday']]} {str(x['hour']).zfill(2)} : {str(x['minute']).zfill(2)}"
@@ -34,7 +37,7 @@ def enabled_alarms(alarms:list[dict]):
 
 class AlarmSelect(discord.ui.Select):
     def __init__(self, title:str, alarms:list[dict]):
-        options = []
+        options = [] # [discord.SelectOption(label="나가기", emoji="⬅️")]
         for i in alarms:
             emoji = "✅" if i['activate'] else "❌"
             options.append(discord.SelectOption(label=i['name'], description=f"{weeknum2day[i['weekday']]} {i['hour']} : {str(i['minute']).zfill(2)}", emoji=emoji, default=i['activate']))
@@ -53,7 +56,7 @@ class Alarm(commands.Cog):
     
     def __init__(self, bot:commands.Bot):
         self.bot = bot
-        self.alarms = {f'{i['id']}-{i['name']} {i['weekday']}-{i['hour']}-{i['minute']}':i for i in list(file.read_json('alarm').values())[0]}
+        self.alarms = {f'{i['id']}-{i['name']} {i['weekday']}-{i['hour']}-{i['minute']}':i for i in list(alarm_file().values())[0]}
         self.nexttime = 60 - datetime.datetime.now().second - datetime.datetime.now().microsecond/1000000
 
         self.update_alarms.start()
@@ -88,8 +91,8 @@ class Alarm(commands.Cog):
                 exist = True
                 break
         if not exist:
-            file.append_json('alarm', "alarms_forever", {'name':name, 'DM':True, 'activate':True, 'id':interaction.user.id, 'weekday':weeknum, 'hour':hour, 'minute':minute})
-            self.alarms = {f'{i['id']}-{i['name']} {i['weekday']}-{i['hour']}-{i['minute']}':i for i in list(file.read_json('alarm').values())[0]}
+            alarm_file.append("alarms_forever", {'name':name, 'DM':True, 'activate':True, 'id':interaction.user.id, 'weekday':weeknum, 'hour':hour, 'minute':minute})
+            self.alarms = {f'{i['id']}-{i['name']} {i['weekday']}-{i['hour']}-{i['minute']}':i for i in list(alarm_file().values())[0]}
             await interaction.response.send_message(f"{interaction.user.mention} {weekday} {str(hour).zfill(2)}:{str(minute).zfill(2)}에 `{name}` 알람이 추가되었습니다. ")
         else:
             await interaction.response.send_message(f"`{name}` 알람은 이미 존재합니다. ")
@@ -111,16 +114,11 @@ class Alarm(commands.Cog):
                 break
         if exist:
             del self.alarms[key_string]
-            file.edit_json('alarm', key='alarms_forever', value=list(self.alarms.values()))
+            alarm_file.edit('alarms_forever', value=list(self.alarms.values()))
             time_str = f"{weeknum2day[i['weekday']]} {i['hour']} : {str(i['minute']).zfill(2)}"
             await interaction.response.send_message(f"{time_str} 에 있었던 `{name}` 알람을 삭제했습니다. ")
         else:
             await interaction.response.send_message(f"`{name}` 알람이 없습니다. ")
-
-    # @alarm.command(name = "select", description = "알람을 선택합니다.")
-    # async def alarmselect(self, interaction:discord.Interaction):
-    #     alarm_select = Select('알람 목록', list(self.alarms.values()))
-    #     await interaction.response.send_message(content=f"### {interaction.user.mention} 님의 알람 목록", view=alarm_select, ephemeral=True)
         
 async def setup(bot):
     await bot.add_cog(Alarm(bot))

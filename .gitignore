@@ -7,13 +7,18 @@ res/json/**
 
 pythoncode/test.py
 pythoncode/stdin.txt
+developer_control.py
 
+Cogs_legacy
+lib_legacy
+
+community/guild_memo/**
 community/memo/**
-community/rev/**
 community/profile/**
-community/profilerev/**
 community/python/**
-community/pyrev/**
+community/rules/**
+
+lib/vars_legacy.py
 
 **/__pycache__
 *.pyc
