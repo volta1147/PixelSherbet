@@ -2,8 +2,6 @@ res/tmp
 res/myname.txt
 res/security/**
 res/json/**
-!res/security/securityfiles.txt
-!res/json/jsonfiles.txt
 
 pythoncode/test.py
 pythoncode/stdin.txt
