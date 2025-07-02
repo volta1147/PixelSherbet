@@ -133,5 +133,3 @@ async def help2(interaction: discord.Interaction):
     await interaction.response.send_message(f"{helps[0]}", view=HelpBtn(interaction=interaction, helps = helps))
 
 bot.run(botset.token)
-
-# PixelMalang
