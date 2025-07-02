@@ -18,5 +18,4 @@ community/rules/**
 
 lib/vars_legacy.py
 
-**/__pycache__
-*.pyc
+**/__pycache__/**
