@@ -15,9 +15,6 @@ class JSON:
 
     def __call__(self): # read
         return self.json_dict
-    
-    def read(self):
-        return self.json_dict
 
     def dump(self, json_dict):
         with self.file.open('w') as res:

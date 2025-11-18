@@ -10,7 +10,6 @@ developer_control.py
 Cogs_legacy
 lib_legacy
 
-community/anonymous/**
 community/guild_memo/**
 community/memo/**
 community/profile/**
@@ -18,7 +17,5 @@ community/python/**
 community/rules/**
 
 lib/vars_legacy.py
-
-rank.png
 
 **/__pycache__
