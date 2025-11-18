@@ -113,7 +113,11 @@ class Botplus(commands.Cog):
         post = await forum.create_thread(name=title, content=text)
         # await post.thread.send(f'-# `{interaction.user.name}` 님이 사용한 /forum 명령어')
         await interaction.response.send_message(f"`{title}` 생성 완료", ephemeral=True)
+<<<<<<< HEAD
         append_log('/forum', post.message, title, interaction.user)
+=======
+        append_log('/forum', post.message, text, interaction.user)
+>>>>>>> 8637841e6613b9f2a15e2bdec9bc15a9a770b9e7
 
     @app_commands.command(name = "logs", description="익명 명령어 사용기록을 확인합니다. ")
     async def anonylog(self, interaction: discord.Interaction, ephemeral:bool=False):
