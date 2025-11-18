@@ -116,7 +116,7 @@ class Botplus(commands.Cog):
         append_log('/forum', post.message, text, interaction.user)
 
     @app_commands.command(name = "logs", description="익명 명령어 사용기록을 확인합니다. ")
-    async def forumchat(self, interaction: discord.Interaction, ephemeral:bool=False):
+    async def anonylog(self, interaction: discord.Interaction, ephemeral:bool=False):
         if interaction.channel.type == discord.ChannelType.private:
             await interaction.response.send_message('DM에서 사용이 불가능한 명령어에요. ', ephemeral=True)
             return
