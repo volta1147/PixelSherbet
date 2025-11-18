@@ -1,9 +1,8 @@
 from launchio import ln, lndir
 import json as json_legacy
 
-# from typing import Literal
-
 json_path = lndir('res', 'json')
+community_path = lndir('community')
 
 def ismemo(filename: str, cmd='memo'):
     name = ln("community", cmd, filename, form="txt")

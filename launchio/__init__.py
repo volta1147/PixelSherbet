@@ -18,11 +18,16 @@ class ln:
     def __init__(self, *paths, form = ""):
         if len(form) == 0:
             self.path = pathname + sep.join(paths)
+            self.name:str = paths[-1] if len(paths)>0 else ''
         else:
             self.path = pathname + sep.join(paths) + "." + form
+            self.name:str = (paths[-1] + "." + form) if len(paths)>0 else ''
 
     def __str__(self):
         return self.path
+
+    def name(self):
+        return self.name
 
     def isfile(self):
         return os.path.isfile(self.path)

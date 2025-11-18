@@ -141,7 +141,7 @@ class Level(commands.Cog):
         rank = (page-1)*10
         for i in userids2:
             rank += 1
-            res  += f"\n{str(rank).rjust(2)}. {i[0].ljust(16)} : {str(i[1]).ljust(5)} (Level {i[1]//gap})"
+            res  += f"\n{str(rank)}. {i[0]} : {str(i[1])} (Level {i[1]//gap})"
         res += "```"
 
         await interaction.response.send_message(res, ephemeral=ephemeral)
