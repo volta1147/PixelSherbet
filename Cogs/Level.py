@@ -141,7 +141,7 @@ class Level(commands.Cog):
         rank = (page-1)*10
         for i in userids_show:
             rank += 1
-            embed.add_field(name=f'{str(rank)}. <@{i[0]}>', value=f'{str(i[1])}/{i[1]//gap*1000+1000} (Level {i[1]//gap})')
+            embed.add_field(name=f'{str(rank)}. <@{i[0]}>', value=f'Level {i[1]//gap} ({str(i[1])}/{i[1]//gap*1000+1000})')
 
         await interaction.response.send_message(embed=embed, ephemeral=ephemeral)
 
