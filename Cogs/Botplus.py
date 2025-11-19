@@ -82,7 +82,6 @@ class Botplus(commands.Cog):
         author_name = author.name
         await ctx.message.delete()
         resp = await ctx.send(abc, reference = ctx.message.reference)
-        await ctx.send(f'-# `{author_name}` 님이 사용한 p?print 명령어')
         if ctx.channel.type != discord.ChannelType.private:
             append_log('p?print', resp, abc, author)
 
@@ -100,7 +99,6 @@ class Botplus(commands.Cog):
     @app_commands.describe(text='적을 내용')
     async def printctx2(self, interaction: discord.Interaction, text:str):
         chat = await interaction.channel.send(text)
-        # await interaction.channel.send(f'-# `{interaction.user.name}` 님이 사용한 /print 명령어')
         await interaction.response.send_message(f'완료', ephemeral=True)
         append_log('/print', chat, text, interaction.user)
 
@@ -111,12 +109,11 @@ class Botplus(commands.Cog):
             await interaction.response.send_message('DM에서 사용이 불가능한 명령어에요. ', ephemeral=True)
             return
         post = await forum.create_thread(name=title, content=text)
-        # await post.thread.send(f'-# `{interaction.user.name}` 님이 사용한 /forum 명령어')
         await interaction.response.send_message(f"`{title}` 생성 완료", ephemeral=True)
         append_log('/forum', post.message, title, interaction.user)
 
     @app_commands.command(name = "logs", description="익명 명령어 사용기록을 확인합니다. ")
-    async def anonylog(self, interaction: discord.Interaction, ephemeral:bool=False):
+    async def anonylog(self, interaction: discord.Interaction, ephemeral:bool=True):
         if interaction.channel.type == discord.ChannelType.private:
             await interaction.response.send_message('DM에서 사용이 불가능한 명령어에요. ', ephemeral=True)
             return

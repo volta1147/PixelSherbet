@@ -45,7 +45,7 @@ class Level(commands.Cog):
         if str(guildid) not in list(server_file().keys()):
             server_file.edit(str(guildid), value={"exp_down": 20, "exp_up": 40, "top_notification": False})
             user_file.edit(str(guildid), "users", value=[])
-        if channelid not in adminc and not message.author.bot:
+        if channelid not in adminc and not message.author.bot and message.guild != None:
             a = user_file()
             before, is_loud = top_rank(message.guild.id)
             
@@ -124,27 +124,26 @@ class Level(commands.Cog):
             await interaction.response.send_message('DM에서 사용이 불가능한 명령어에요. ', ephemeral=True)
             return
         a = user_file()
-        usernames = [i['nick']  for i in a[str(interaction.guild.id)]['users']]
+        userids = [i['id'] for i in a[str(interaction.guild.id)]['users']]
         userexps  = [i['chats'] for i in a[str(interaction.guild.id)]['users']]
-        users = zip(usernames, userexps)
+        users = zip(userids, userexps)
 
         userids = sorted(users, key=lambda x:x[1], reverse=True)
         if page < 1 or page > (len(userids)+9)/10:
             await interaction.response.send_message('조회할 수 없는 페이지에요.')
             return
         if page > (len(userids)-1)/10:
-            userids2 = userids[(page-1)*10:]
+            userids_show = userids[(page-1)*10:]
         else:
-            userids2 = userids[(page-1)*10:page*10]
+            userids_show = userids[(page-1)*10:page*10]
 
-        res = f"### {interaction.guild.name} Leaderboard {page}/{int(len(userids)/10+0.9)}\n```"
+        embed = discord.Embed(colour=0xc0ffee, title=f'{interaction.guild.name} Leaderboard', description=f'Page {page}/{int(len(userids)/10+0.9)}, {len(userids)} Members.')
         rank = (page-1)*10
-        for i in userids2:
+        for i in userids_show:
             rank += 1
-            res  += f"\n{str(rank)}. {i[0]} : {str(i[1])} (Level {i[1]//gap})"
-        res += "```"
+            embed.add_field(name=f'{str(rank)}. <@{i[0]}>', value=f'{str(i[1])}/{i[1]//gap*1000+1000} (Level {i[1]//gap})')
 
-        await interaction.response.send_message(res, ephemeral=ephemeral)
+        await interaction.response.send_message(embed=embed, ephemeral=ephemeral)
 
     admin = app_commands.Group(name="level", description="레벨 관리 시스템")
 
@@ -163,7 +162,7 @@ class Level(commands.Cog):
     
     @admin.command(name = "top_rank", description = "1위 변동이 있을 때 알립니다. ")
     @app_commands.describe(notification='알림')
-    async def iLoveTOP(self, interaction:discord.Interaction, notification:bool|None): # 빨주노초 I'm legend 타노스
+    async def newDichang(self, interaction:discord.Interaction, notification:bool|None):
         if interaction.guild and interaction.user.guild_permissions.manage_guild:
             changed = False
             if notification != None:
