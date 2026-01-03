@@ -5,7 +5,7 @@ import random
 import time
 import matplotlib.pyplot as plt
 from launchio import ln
-from launchio.json import JSON
+from launchio.json import PMjson
 from lib.file import json_path
 
 # 여기에 사용자 정의 라이브러리 넣기
@@ -13,9 +13,10 @@ from lib.file import json_path
 gap = 1000
 timeout = 60
 
-user_file = JSON(json_path.chifile('users.json'))
-adminc_file = JSON(json_path.chifile('adminc.json'))
-server_file = JSON(json_path.chifile('servers.json'))
+user_file = PMjson(json_path.chifile('users.json'))
+adminc_file = PMjson(json_path.chifile('adminc.json'))
+server_file = PMjson(json_path.chifile('servers.json'))
+acc_file = PMjson(json_path.chifile('accounts.json'))
 
 def top_rank(guild_id:int):
     if str(guild_id) not in list(server_file().keys()) or user_file()[str(guild_id)]['users'] == []:
@@ -38,6 +39,9 @@ class Level(commands.Cog):
 
         for i in adminc_raw.values():
             adminc.extend(i)
+
+        stock_range = acc_file()['settings']['stock_range']
+        point_up = False
             
         msgchannel  = message.channel
         channelid   = (msgchannel.parent_id) if (type(msgchannel) == discord.Thread) else (msgchannel.id)
@@ -46,7 +50,8 @@ class Level(commands.Cog):
             server_file.edit(str(guildid), value={"exp_down": 20, "exp_up": 40, "top_notification": False})
             user_file.edit(str(guildid), "users", value=[])
         if channelid not in adminc and not message.author.bot and message.guild != None:
-            a = user_file()
+            user_in_server = user_file()
+            user_public = acc_file()
             before, is_loud = top_rank(message.guild.id)
             
             exp_up   = server_file()[str(message.guild.id)]['exp_up']
@@ -54,17 +59,17 @@ class Level(commands.Cog):
             exp0 = 0
             exp1 = 0
             upgrade = random.randrange(exp_down, exp_up)
-            # newpoint = random.randrange(1, 5)
-            if message.author.id not in [i['id'] for i in a[str(message.guild.id)]['users']]:
-                a[str(message.guild.id)]['users'].append({
+            if message.author.id not in [i['id'] for i in user_in_server[str(message.guild.id)]['users']]:
+                user_in_server[str(message.guild.id)]['users'].append({
                     'id'    : message.author.id,
                     'nick'  : message.author.name,
                     'chats' : upgrade,
                     'min'   : True, # False
                     'last'  : time.time()
                 })
+                point_up = True
             else:
-                for i in a[str(message.guild.id)]['users']:
+                for i in user_in_server[str(message.guild.id)]['users']:
                     if i['id'] == message.author.id and i['min']:
                         if time.time() - i['last'] < timeout:
                             break
@@ -74,11 +79,26 @@ class Level(commands.Cog):
                         i['min']    = True # False
                         i['last']   = time.time()
                         exp1        = i['chats']//gap
+                        point_up = True
+
+            if str(message.author.id) not in user_public['users'].keys():
+                user_public['users'][str(message.author.id)] = {
+                    'point': 0,
+                    'stocks':{}
+                }
+            
+            if point_up:
+                for j in stock_range:
+                    if len(message.content) < j['length'] or j['length'] == -1:
+                        user_public['users'][str(message.author.id)]['point'] += random.randrange(j['min'], j['max'])
+                        break
+                        
 
             if exp1 > exp0:
                 await message.channel.send(f"{message.author.mention} 님이 {exp1} 레벨로 레벨업했습니다. ")
 
-            user_file.dump(a)
+            user_file.dump(user_in_server)
+            acc_file.dump(user_public)
 
             after, tmp = top_rank(message.guild.id)
 

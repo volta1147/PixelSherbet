@@ -5,7 +5,7 @@ import asyncio
 from discord.ext   import commands, tasks
 from datetime      import timedelta
 from typing        import Literal
-from launchio.json import JSON
+from launchio.json import PMjson
 from lib.file      import json_path
 
 KST=datetime.timezone(datetime.timedelta(hours=9))
@@ -13,7 +13,7 @@ KST=datetime.timezone(datetime.timedelta(hours=9))
 weekday2num = {'Mon':0, 'Tue':1, 'Wed':2, 'Thr':3, 'Fri':4, 'Sat':5, 'Sun':6}
 weeknum2day = {0:'Mon', 1:'Tue', 2:'Wed', 3:'Thr', 4:'Fri', 5:'Sat', 6:'Sun'}
 
-alarm_file = JSON(json_path.chifile('alarm.json'))
+alarm_file = PMjson(json_path.chifile('alarm.json'))
 
 def alarm_list(user:discord.User|discord.Member):
     alarms = list(alarm_file().values())[0]

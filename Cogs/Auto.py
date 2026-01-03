@@ -5,16 +5,16 @@ import lib.MemoUI as MemoUI
 from discord import app_commands
 from discord.ext import commands
 from discord.utils import get
-from launchio.json import JSON
+from launchio.json import PMjson
 from lib.file import json_path
 
 # 여기에 사용자 정의 라이브러리 넣기
 
-auto_file = JSON(json_path.chifile('auto_message.json'))
-category_file = JSON(json_path.chifile('categories.json'))
-channel_file = JSON(json_path.chifile('channels.json'))
-channel2_file = JSON(json_path.chifile('channels2.json'))
-role_file = JSON(json_path.chifile('role.json'))
+auto_file = PMjson(json_path.chifile('auto_message.json'))
+category_file = PMjson(json_path.chifile('categories.json'))
+channel_file = PMjson(json_path.chifile('channels.json'))
+channel2_file = PMjson(json_path.chifile('channels2.json'))
+role_file = PMjson(json_path.chifile('role.json'))
 
 class WriteModal(MemoUI.WriteModal):
     def __init__(self, memo_title):

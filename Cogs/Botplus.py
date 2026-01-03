@@ -2,7 +2,7 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 from launchio import lndir
-from launchio.json import JSON
+from launchio.json import PMjson
 from lib.file import community_path
 import datetime
 
@@ -49,7 +49,7 @@ def append_log(log_type:str, message:discord.Message, content:str, user:discord.
     if not logdir.isdir():
         logdir.makedirs()
         file.write('{}')
-    log = JSON(file)
+    log = PMjson(file)
     content_ = ''
     if len(content) > 20:
         content_ = content[:20] + '...'
@@ -122,7 +122,7 @@ class Botplus(commands.Cog):
             return
         community_log = community_path.chifile('anonymous', str(interaction.guild_id), 'log.json')
         embed = discord.Embed(title='PixelMalang Log')
-        log_list = list(JSON(community_log).read().values())
+        log_list = list(PMjson(community_log).read().values())
         log_list.reverse()
         if len(log_list) > 10:
             log_list = log_list[:10]

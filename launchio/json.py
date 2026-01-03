@@ -8,7 +8,7 @@ json : JSON class
 from launchio import ln
 import json as json_legacy
 
-class JSON:
+class PMjson:
     def __init__(self, file:ln):
         self.file = file
         self.json_dict:dict = json_legacy.load(file.open())
